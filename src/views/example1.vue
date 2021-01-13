@@ -15,31 +15,48 @@ export default {
   },
   created() {
     const sketch = p5 => {
-        let w = 500;
-        let h = 400;
+        var x;
+        var y;
+        var r = 50;
+        var mi;
+        var mj;
+
+        
 
         // let w = window.innerWidth;
         // let h = window.innerHeight;
 
         p5.setup = () => {
-            p5.createCanvas(w, h);
+            p5.createCanvas(400, 400);
+            x = 50;
+            y = 50;
+            p5.background(100);
+            for(var i=0;i<7;i++){
+              for(var j=0;j<7;j++){
+                p5.fill(210);
+                p5.circle(x+i*r, y+j*r, r);  
+              }
+            }
+  
         };
 
         p5.draw = () => {
-            // call your method:
-            p5.changeBG(p5.mouseX, p5.mouseY);
-            
-            // p5.background(33, 33, 33);
-            p5.ellipse(p5.mouseX, p5.mouseY, 100);
-
+            if(p5.mouseIsPressed){
+              mi=Math.round((p5.mouseX-50)/r);
+              mj=Math.round((p5.mouseY-50)/r);
+              print(mi, mj);
+              for(var i=0;i<7;i++){
+                for(var j=0;j<7;j++){
+      
+                  if(i===mi && j===mj){
+                    p5.fill(255, 204, 0);
+                    p5.circle(x+i*r, y+j*r, r);
+                  }
+                }
+              }
+            }
         };
 
-        // create methods:
-        p5.changeBG = (x, y) => {
-          let _x = p5.map(x, 0, w, 0, 255);
-          let _y = p5.map(y, 0, h, 0, 255);
-          p5.background(_x, _y, 33);
-        }
     }
 
     this.p5Canvas = new P5(sketch, 'p5Canvas');

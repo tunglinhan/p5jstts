@@ -1,7 +1,7 @@
 <template>
   <h1>TRY TRY SEE</h1>
   <div id="nav">
-    <router-link to="/">Example 1</router-link> |
+    <router-link to="/">Example 1</router-link> 
   </div>
   <router-view :key="$route.fullPath"/>
 </template>
